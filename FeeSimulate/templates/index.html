@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快活クラブ料金シミュレーション</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">快活クラブ料金シミュレーション</h1>
+        <form action="{% url 'calculateFee' %}" method="GET" class="mt-4">
+            <div class="form-group">
+                <label for="age">年齢:</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">滞在時間（分）:</label>
+                <input type="number" class="form-control" id="duration" name="duration" required>
+            </div>
+            <div class="form-group">
+                <label for="checkin-time">入店時刻:</label>
+                <input type="time" class="form-control" id="checkin-time" name="checkin-time" required>
+            </div>
+            <div class="form-group">
+                <label for="first-30min-fee">30分料金:</label>
+                <input type="number" class="form-control" id="first-30min-fee" name="first-30min-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="every-10min-fee">10分ごとの料金:</label>
+                <input type="number" class="form-control" id="every-10min-fee" name="every-10min-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="pack-3hr-fee">3時間パック料金:</label>
+                <input type="number" class="form-control" id="pack-3hr-fee" name="pack-3hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="pack-6hr-fee">6時間パック料金:</label>
+                <input type="number" class="form-control" id="pack-6hr-fee" name="pack-6hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="pack-9hr-fee">9時間パック料金:</label>
+                <input type="number" class="form-control" id="pack-9hr-fee" name="pack-9hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="pack-12hr-fee">12時間パック料金:</label>
+                <input type="number" class="form-control" id="pack-12hr-fee" name="pack-12hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="pack-15hr-fee">15時間パック料金:</label>
+                <input type="number" class="form-control" id="pack-15hr-fee" name="pack-15hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="pack-18hr-fee">18時間パック料金:</label>
+                <input type="number" class="form-control" id="pack-18hr-fee" name="pack-18hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="pack-21hr-fee">21時間パック料金:</label>
+                <input type="number" class="form-control" id="pack-21hr-fee" name="pack-21hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="pack-24hr-fee">24時間パック料金:</label>
+                <input type="number" class="form-control" id="pack-24hr-fee" name="pack-24hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="night-8hr-fee">ナイト8時間パック料金:</label>
+                <input type="number" class="form-control" id="night-8hr-fee" name="night-8hr-fee" required>
+            </div>
+            <div class="form-group">
+                <label for="custom-fee">食事や入会金などの料金:</label>
+                <input type="number" class="form-control" id="custom-fee" name="custom-fee"  value="0">
+            </div>
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="student-discount">
+                    <label class="form-check-label" for="student-discount">学生割引適用</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">料金を計算</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
