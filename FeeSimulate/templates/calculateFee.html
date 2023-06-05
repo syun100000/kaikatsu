@@ -2,11 +2,121 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <script type="text/javascript">
+        var feeData = JSON.parse('{{ fee_list_json|escapejs }}');
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <title>料金シミュレーション結果</title>
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #F8F8F8;
+        }
+
+        h2 {
+            color: #FF8C00;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: #FF8C00;
+            color: #FFFFFF;
+        }
+
+        td {
+            color: #FF8C00;
+        }
+
+        a {
+            color: #FF8C00;
+        }
+    </style>
 </head>
 <body>
-    <p>{{fee}}</p>
+    <div class="container">
+        <h2>料金シミュレーション結果</h2>
+        <h3>{{h}}時間{{m}}分滞在の料金：{{fee_render}}円</h3>
+        <h2>料金予想グラフ</h2>
+        <p>時間ごとの料金の予想をグラフで表示する</p>
+        <button onclick="showChart()" class="btn btn-outline-warning">グラフを表示する</button>
+        <canvas id="feeChart" style="display:none;"></canvas>
+        <h2>料金予想テーブル</h2>
+        <p>時間ごとの料金の予想を表で表示する</p>
+        <button onclick="showTable()" class="btn btn-outline-warning">テーブルを表示する</button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>経過時間</th>
+                    <th>料金</th>
+                </tr>
+            </thead>
+            <tbody id="fee-table" style="display:none;">
+                {% for key, value in fee_list.items %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}円</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-outline-warning">料金入力フォームに戻る</a>
+    </div>
+    <script>
+        // 料金予想を表示するボタンを押したときに、料金予想の表を表示する
+        function showTable() {
+            var table = document.getElementById("fee-table");
+            if (table.style.display === "none") {
+                table.style.display = "table-row-group";
+            } else {
+                table.style.display = "none";
+            }
+        }
+        // グラフを表示するボタンを押したときに、グラフを表示する
+        function showChart() {
+            var chart = document.getElementById("feeChart");
+            if (chart.style.display === "none") {
+                chart.style.display = "block";
+            } else {
+                chart.style.display = "none";
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        // 時間ごとの料金の予想をグラフで表示する
+        var ctx = document.getElementById('feeChart').getContext('2d');
+        var labels = Object.keys(feeData);
+        var data = Object.values(feeData);
+        var feeChart = new Chart(ctx, {
+            type: 'line',  // グラフの種類（ここでは棒グラフ）
+            data: {
+                labels: labels,  // x軸のラベル（経過時間）
+                datasets: [{
+                    label: '料金',
+                    data: data,  // y軸のデータ（料金）
+                    backgroundColor: 'rgba(255, 140, 0, 0.2)',  // グラフの色
+                    borderColor: 'rgba(255, 140, 0, 1)',  // グラフの境界線の色
+                    borderWidth: 1  // グラフの境界線の幅
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+        
+    <!-- Add Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

@@ -2,7 +2,7 @@ from django  import forms
 
 class FeeForm(forms.Form):
     age = forms.IntegerField(label="年齢", min_value=0, max_value=150)
-    duration = forms.IntegerField(label="滞在時間", min_value=0, max_value=1000)
+    duration = forms.TimeField(label="滞在時間")
     checkin_time = forms.TimeField(label="チェックイン時間")
     first_30min_fee = forms.IntegerField(label="30分までの料金", min_value=0, max_value=10000)
     every_10min_fee = forms.IntegerField(label="10分ごとの追加料金", min_value=0, max_value=10000)
